@@ -1,6 +1,3 @@
-NAME: Ryan Wakefield
-EMAIL: ryanwakefield@g.ucla.edu
-ID: 904975422
 
     In additions to the required files in the tarball, I added a test script "testScript.sh" that works with my 
 'make check' function. When I run 'make check', the make function calls the test script to perform the necessary tests
