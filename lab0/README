@@ -1,0 +1,24 @@
+NAME: Ryan Wakefield
+EMAIL: ryanwakefield@g.ucla.edu
+ID: 904975422
+
+    In additions to the required files in the tarball, I added a test script "testScript.sh" that works with my 
+'make check' function. When I run 'make check', the make function calls the test script to perform the necessary tests
+to see if the program is running as expected.
+
+Smoke-Test: For the smoke test in 'make check', I performed basic tests to make sure that the core function of the program
+is running properly. This includes making sure that the function will exit with the proper exit codes, and will successfully
+transfer the text from standard input to standard output. Some of the tests include:
+
+"./lab0 --input" - to check to make sure it will catch that an argument is required.
+"./lab0 --NotAnArg" to check if it will catch an invalid argument.
+"./lab0 --catch --segfault" to check if it will catch the segfault
+"./lab0 --catch --input=NotAFile" to check to see if it will catch the invalid file
+"./lab0 --segfault" to check to see if the program will exit immediately after the segfault.
+
+As well as other various tests to ensure the basic implementation of the code is performing as expected. 
+
+Resources that I used to further understand getopt_long function:
+https://linux.die.net/man/3/getopt_long
+https://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Options.html
+
