@@ -1,0 +1,98 @@
+NAME: Ryan Wakefield
+EMAIL: ryanwakefield@g.ucla.edu
+ID: 904975422
+
+lab2_list.gp:
+	I removed 4 of the grep commands for graph 3 of the list png's as they were not passing due to them not having protected critical sections. These were consistently failing as there were 12 threads running and no protection in the critical sections, so I decided to remove them.
+
+
+Contents of tar.gz file:
+	 Makefile: build the program we are running
+	 	   dist: makes a tar file of all of the files in the tar.gz file
+		   tests: run test cases and outputs results into csv files
+		   graphs: Produces the graphs from the the data in the csv file
+		   clean: removes tar file, and executable files.
+	SortedList.h: Header file that contains the functions to insert, lookup and deletes elements in a circularly linked list.
+	SortedList.c: C file that contains the functions to insert, lookup and delete elements in a circularly linked list.
+	lab2_add.c: C file that has code to add or subtract from a global counter.
+	lab2_list.c: C file that adds and deletes elements from a universally linked list.
+	add_data.sh: Program to run test cases on the add function to collect data to create graphs
+	add_list.sh: Program to run test cases on circularly linked list to collect data to create graphs
+	lab2_add.csv: CSV file that contains data regarding add function and their mutexes
+	lab2_list.csv: CSV fle that contains data regarding the circularly linked list and how the mutexes impacts cost per operation
+	lab_list-(1-4).png: graphs of the add function
+	lab_add-(1-5).png: graphs of data contained from the list function
+	lab2_add.gp: Creates the graphs of the add function
+	lab2_list.gp: Creates the graphs of the list function.
+
+===================================================================================================
+
+QUESTION 2.1.1 - causing conflicts:
+Why does it take many iterations before errors are seen?
+    It takes many iterations before errors are seen because with few iterations, the thread finished and returns before
+    it is interrupted. With many iterations, there is a longer run-time for each thread, and there is a higher chance
+    that an interrupt will occur and cause a context switch. If a context switch occurs after the counter has been loaded,
+    and before it has been stored and updated, this will cause the counter to not have the updated value before a switch,
+    and cause the counter to fail. So, a failure occurs if a context switch occurs in the critical section of the add
+    function, and a context seitch is more likely to occur with more iterations and a longer run-time.
+
+Why does a significantly smaller number of iterations so seldom fail?
+    A smaller number of iterations will seldom fail because the thread will have enough time to run to completion
+    before a context switch occurs. The failure occurs when a context-switch occurs in the critical section, and a context
+    switch will more likely occur with a longer run-time, which occurs if the thread has to do more operations, or more
+    iterations.
+
+===================================================================================================
+
+QUESTION 2.1.2 - cost of yielding:
+Why are the --yield runs so much slower?
+    --Yields runs a lot slower because every time we perform an add or subtract, we are forcing a context switch to occur and pass the CPU to another thread or process. Context switches take a good amount of time to perform, as we are passing control
+to the Operating System.
+
+Where is the additional time going?
+      The additional time is going to to passing the control from the user to the kernel, and scheduling another process or
+      thread to use the CPU.
+
+Is it possible to get valid per-operation timings if we are using the --yield option?
+If so, explain how. If not, explain why not.
+
+No, it is not possible because we are having to account for the time it takes for each of the context switches. Context switches taje a decent amount of time considering the Operating System is taking control of the CPU and is having to save registers of the previously running files.
+
+=====================================================================================================
+
+QUESTION 2.1.3 - measurement errors:
+Why does the average cost per operation drop with increasing iterations?
+If the cost per iteration is a function of the number of iterations, how do we know how many iterations to run (or what the "correct" cost is)?
+
+The average cost per operation drops with increasing iterations because we are reducing the percentage of overall time that is taken up for costs such as creating the threads and the context switches that are performed while the threads are being run. The costs of initializing threads and context switches take up a significant amount of time compared to a single operation. However, the more operations that are performed, the less relevant the starup time of the threads and context switches will be compared to overall time. This is why cost per operation will drop as the number of iterations increased; because more operations are being performed that is reducing the impact that initializing threads has on the cost per operation. The more iterations we run, the closer we get to the true "cost" per operation.
+
+========================================================================================================
+
+QUESTION 2.1.4 - costs of serialization:
+Why do all of the options perform similarly for low numbers of threads?
+Why do the three protected operations slow down as the number of threads rises?
+
+All operations perform similarly for low number of threads because the threads aren't having to wait for another to finish in order to get control of the CPU, but with more threads there is more waiting for another thread to finish and thus more time for all threads to finish. Additionally, more context switches need to be performed with more threads and this will take more time to perform. The three protection operations slow down as the number of threads rises because more threads are waiting to access the critical section of the code. This creates a bottleneck since only one thread can enter at a time and the rest of the threads are having to wait for it to finish in the critcal section before the next one can enter. 
+
+=========================================================================================================
+
+QUESTION 2.2.1 - scalability of Mutex
+Compare the variation in time per mutex-protected operation vs the number of threads in Part-1 (adds) and Part-2 (sorted lists).
+Comment on the general shapes of the curves, and explain why they have this shape.
+Comment on the relative rates of increase and differences in the shapes of the curves, and offer an explanation for these differences.
+
+In part-1 the time per mutex-protected operation increased linearly with an increase in the number of threads, and after a point, the cost per operation vs number of threads will become more constant. In the graph, after 4 threads are created, the cost of operation becomes fairly constant with an increase in the number of threads. This could be because when you have few threads, there will not be very much context switching which will save time and decrease the cost per opertation, however, when more threads are being run there will be more context switschin, which will increase the cost per operation. After a certain number of threads, 4 in this case, it looks as though the amount of impact thatcontext switches haves becomes constant, it won't increase the operation cost anymore by adding more context switches.
+
+In part 2, the average per mutex-protected operation vs the number of threads is linear thorughtout the enitre graph. This is case beause as you are adding more elements to the sorted list, you are having to check more elements to find where to insert a new element, and delete or lookup an existinf element. This will increase the amount of elements you have to search through. Additionally, if you have more threads running at the same time, you will have multiple threads adding elements to the same list, and thus there will be more elements each of the threads have to search through. Thus, the cost per operation vs the number of threads will be linearly increasing.
+
+
+===========================================================================================================
+
+QUESTION 2.2.2 - scalability of spin locks
+
+Compare the variation in time per protected operation vs the number of threads for list operations protected by Mutex vs Spin locks. Comment on the general shapes of the curves, and explain why they have this shape.
+Comment on the relative rates of increase and differences in the shapes of the curves, and offer an explanation for these differences.
+
+For the fucntion of adding to a counter, for a low number of threads the difference between the mutex and spin-locks time per operation is fairly similar, with mutexs taking a little more time for 1 thread. Howerver, as the number of threads increases, the cost per operation for mutexes becomes constant while the spin lock will continue to increase linearly. Thus, for more threads, the better option to go with to reduce the cost per operation is a mutex rather than a spin-lock. Spin-lcoks will continue to increase linearly with the number of threads because there will be many threads that will take the entire time they are running on the CPU to just spin, waiting for the thread that is holding the lock to finsihs in the critical section. With mutexes, the thread will yield and allow the one with the lock to finish running so the other thread with the lock can finsish in the critical section and release it.
+
+For the the insertiona nd deletion in the list in part two, both of the graphs increase linearly, with the spin-lock increasing at a faster rate than the mutex. Thus, the mutex is also a better option for the list. Both of these increase linearly because as more threads are placing elements into the list, more searching is required for placement and deletion of elements. This is why the cost will continuously increase as the number of threads increases. However, spin locks increase quicker due to them constantly running and not yielding to the thread that has the lock.
