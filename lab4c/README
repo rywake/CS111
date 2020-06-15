@@ -1,0 +1,18 @@
+NAME: Ryan Wakefield
+EMAIL: ryanwakefield@g.ucla.edu
+ID: 904975422
+
+Files in tar.gz:
+* lab4c_tcp.c- source code to establish a connection to the server and sends messages to and from the
+    server without encryption.
+* lab4c_tls.c- source code to establish a connection to the server and sends messages to and
+    from the server with encryption.
+* Makefile:
+    default: compiles lab4c_tcp.c and lab4c_tls.c source files into lab4c_tcp and lab4c_tls,
+             respectively.
+    clean: removes exectuables and tar.gz files.
+    dist: creates a tar.gz file that includes the following files:
+            * lab4c_tcp.c
+            * lab4c_tls.c
+            * Makefile
+            * README
