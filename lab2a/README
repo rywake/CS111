@@ -1,6 +1,3 @@
-NAME: Ryan Wakefield
-EMAIL: ryanwakefield@g.ucla.edu
-ID: 904975422
 
 lab2_list.gp:
 	I removed 4 of the grep commands for graph 3 of the list png's as they were not passing due to them not having protected critical sections. These were consistently failing as there were 12 threads running and no protection in the critical sections, so I decided to remove them.
