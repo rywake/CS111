@@ -1,0 +1,26 @@
+NAME: Leonid Krashanoff,Ryan Wakefield
+EMAIL: lkrashanoff2@gmail.com,ryanwakefield@g.ucla.edu
+ID: 805133939,904975422
+
+# File List
+* ext2_fs.h
+    - The header file provided in the project spec. Minimal modifications made.
+* libext2.h
+    - The header file containing a collection of useful macros, typedefs, and functions
+      used throughout the entire project.
+* libext2.c
+    - Implementations of libext2.h
+* lab3a.c
+    - The source code for our driver program, which processes a disk image.
+* Makefile
+    - debug: builds the project with debug symbols and no optimization
+    - prod: builds the project for submission
+    - dist: builds our project tarball
+    - clean: restores the directory to a freshly untarred state
+* README
+    - The file you're reading right now!
+
+# Resources Cited
+* https://www.nongnu.org/ext2-doc/ext2.html
+* https://en.wikipedia.org/wiki/Ext2
+* TA slides
