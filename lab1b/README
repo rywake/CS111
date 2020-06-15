@@ -1,0 +1,57 @@
+NAME: Ryan Wakefield
+EMAIL: ryanwakefield@g.ucla.edu
+ID: 904975422
+
+Files Included in tar.gz:
+
+lab1b-server.c - Source code that creates a connection through a port with a client, for the client to pass data to the server to be 
+	       processed and send back. The server creates a connection and waits for a client to accept the connection. The server will then
+	       fork a process that will execute some command that was passed in through the command line. When the shell (child process) is 
+	       finished executing (received a ^D from the server(parent)) the server will shutdown its connection with the client and exit. There
+	       is a required argument '--shell' that needs to be passed in to run. There is an option '--compress' argument that will compress
+	       the data being sent from the client to the server and back to the client.
+
+lab1b-client.c - The client establishes a connection with the server and passes data from the keyboard to the server, which process
+	       the data and passes it back to the client, who outputs the results. It has a required '--port' argument that it uses to choose
+	       a port to establish a connection with the server. It also has an optional '--log' argument that will write all of the data that is
+	       passed to and from the server to the file that it was given.
+
+Makefile: Makefile supports three commands:
+                                 default - creates two executable files (lab1b-server) and (lab1b-client) from the source code files
+				 	 lab1b-server.c and lab1b-client.c.
+                                 dist - creates a tar.gz file that includes the Makefile, lab1b-server.c source code and lab1b-client.c source 
+				      	code, and README file.
+				clean - removes the executables lab1b-server and lab1b-client, as well as removes the tar file 
+				      lab1b-904975422.tar.gz.
+ 
+Limitations of the program:
+           The program only knows how to process optional arguments that include "--" at the beginning of
+           the argument. It will not be able to process any arguments that do not start with this, and will
+           not be able to throw an error for an incorrect argument. Because we are inputting the standard input
+           into the shell character-by-character, we are unable use backspace on any of the typos that we created.
+
+Features:
+        The program also allows for an optional argument '--shell' that will be followed by a program to execute. Lab1b-server will fork
+        and create a child process to run the program that was inputted following the '--shell' argument. The terminal will pass the input to the
+	client who will pass the input to the server (parent process) throug the socket and the parent process will pass input to the 
+	shell (child process) to be processed. This process will work in reverse to get the data back to the client to output the results to the
+	terminal. If you use the '--log' option when creating the client, all data moving to and from the socket will be written to the file given
+	with the log argument. If both processes are given the '--compress' option when being created, the data will be compressed before entering
+	the socket and decompressed after being read from the socket.
+
+Testing Methodology:
+	Various tests were run to ensure the program was working properly, including that information was being passed through the socket properly, 
+	the pipe was receiving data between the parent and child process. Tests were also conducted to ensure that the '--log' argument passes all of
+	the information to the file is was given, and the '--compress' option compresses data before passing it into the socket and after reading it
+	from the socket.
+
+Research on system calls and functions used in this project:
+
+bind - bind a name to a socket.
+     https://linux.die.net/man/2/bind
+
+zlib - https://www.zlib.net/zlib_how.html 
+
+Additionally, TA slides were used to learn how to use the various API's.
+
+
