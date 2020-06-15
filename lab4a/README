@@ -1,0 +1,20 @@
+NAME: Ryan Wakefield
+EMAIL: ryanwakefield@g.ucla.edu
+ID: 904975422
+
+BeagleBone Serial Number: BBGW19010192
+BeagleBone Mac Address: 2CF7F106A0BF
+
+Description of Files:
+
+my_beaglebone.jpg: A selfie of me holding my beaglebone
+
+connected.png: I was unable to connect via USB into BeagleBone due to my Operating system not allowing me (running Mac OS Catalina). I did connect, however, using the command 'sudo screen sudo screen /dev/tty.usbmodemBBGW190101925'. This allowed me access to my beaglebone.
+
+copy.png: This is a screenshot of me using the scp command in terminal to transfer my hello world program from my computer to the Beaglebone.
+
+build_run.png: This is a screenshot of me using gcc in Beaglebone to compile my hello world c code, and then running it.
+
+git.png: This is a screenshot of me using the apt-get function to install git, and then using the 'git clone' command to clone my GitHub repository to my beaglebone.
+
+Makefile: Builds the tarball with all of the files above.
