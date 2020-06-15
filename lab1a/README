@@ -1,0 +1,54 @@
+NAME: Ryan Wakefield
+EMAIL: ryanwakefield@g.ucla.edu
+ID: 904975422
+
+Files Included in tar.gz:
+
+lab1a.c - Source code for creating a child process to communicate with the parent process to execute commands and display
+          the result back stdout. The terminal is in non-canonical mode with no echo.
+
+Makefile: Makefile supports three commands: 
+	  	   	    	 default - create an executable (lab1a) using the source code c file (lab1a.c),
+	  			 dist - creates a tar.gz file that includes the Makefile, lab1a.c source code, and
+				 README file.
+
+Limitations of the program:
+	   The program only knows how to process optional arguments that include "--" at the beginning of
+	   the argument. It will not be able to process any arguments that do not start with this, and will 
+	   not be able to throw an error for an incorrect argument. Because we are inputting the standard input 
+	   into the shell character-by-character, we are unable use backspace on any of the typos that we created. 
+
+Features:
+	Simply calling the executable program 'lab1a' by itself will allow you to type into a buffer that reads
+	from stdin, and will echo your input back to the screen, character-by character, non-canonically, with no echo. The
+	program also allows for an optional argument '--shell' that will be followed by a program to execute. Lab1a will fork
+	and create a child process to run the program that was inputted following the '--shell' argument. The terminal (parent)
+	process will pass input to the shell (child process) to be processed, and will pass the output back to the terminal, whom
+	will print it back to stdout.
+
+
+Testing Methodology
+	The program was test using the smoke-test that was provided. Additionally, other smoke-tests were performed to
+	verify the validity of the program. These smoke tests check that the program handles different cases properly such as:
+	       1. Calling the program 'lab1a' without the '--shell' argument, followed by terminating with '^D'.
+	       2. Calling the program with the '--shell' argument, and checking that the program exits correctly when
+	       	  	  '^D' was detected.
+	       3. Checking that the program with the '--shell' argument will exit properly when '^C' is read.
+	       4. Ensuring that the shell receives a SIGPIPE when '^C' is passed in.
+	       5. Checking that the terminal's original settings are restored before terminating the program.
+	       6. Checking for the correct exit signal and status of the child process.
+	       7. Ensuring that any data in the pipe is processed and written to stdout before termination.
+
+Research on system calls and functions used in this project:
+
+poll(2) - wait for first of multiple input sources
+	sources: https://linux.die.net/man/3/poll
+		 http://www.unixguide.net/unix/programming/2.1.2.shtml
+
+pipe(2) - for inter-process communication
+	sources: https://www.geeksforgeeks.org/c-program-demonstrate-fork-and-pipe/
+		 https://www.geeksforgeeks.org/pipe-system-call/
+
+exec(3) - a family of calls for loading a new program into a running process
+	sources: https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
+		 
