@@ -1,0 +1,13 @@
+NAME: Ryan Wakefield
+EMAIL: ryanwakefield@g.ucla.edu
+ID: 904975422
+
+List of files included in tar:
+
+lab4b.c - Source code for the Beaglebone temperature sensor program. Reads the temperature sensor from the beaglebone and converts the temperature accordingly.
+Makefile - compiles the code, deletes the executables and tar files when 'make clean' is run, and run a smoke test for the program
+smoke.sh - runs test cases to ensure the programs basic functionality is running properly.
+
+Research:
+	I used the test program P4B_check.sh to help me create my smoke test file (smoke.sh).
+	https://iotdk.intel.com/docs/master/mraa/aio_8h.html - help with aio functions
