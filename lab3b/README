@@ -1,0 +1,26 @@
+NAME: Leonid Krashanoff,Ryan Wakefield
+EMAIL: lkrashanoff2@gmail.com,ryanwakefield@g.ucla.edu
+ID: 805133939,904975422
+
+# File List
+* lab3b.py:
+     - source code that checks for corruptions in the file system CSV given
+* Makfile:
+     - default: builds the python file for execution
+     - clean: removes the tar file and any executables created
+     - dist: creates the project tarball
+* README:
+     - current file that gives information of the files in the tarball.
+
+# Extra information, comments
+
+If a superblock or group entry are missing from the CSV, the script will exit with
+the success return code (since no blocks or inodes are to be scanned).
+
+For this project, we implemeneted the code using Python3 for its CSV interoperability and
+idiomatic syntax.
+
+# Sources Cited
+* https://docs.python.org/3/library/csv.html
+* https://docs.python.org/2/library/math.html
+* https://www.geeksforgeeks.org/python-ways-to-create-a-dictionary-of-lists/
