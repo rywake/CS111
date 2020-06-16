@@ -1,8 +1,3 @@
-/*
-NAME:Ryan Wakefield
-EMAIL: ryanwakefield@g.ucla.edu
-ID: 904975422
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
