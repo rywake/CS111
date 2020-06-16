@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#NAME:Ryan Wakefield
-#EMAIL: ryanwakefield@g.ucla.edu
-#ID: 904975422
-
 logfile=$(mktemp tmp.XXX)
 
 make
