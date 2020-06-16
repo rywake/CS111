@@ -1,6 +1,3 @@
-#NAME: Ryan Wakefield
-#EMAIL: ryanwakefield@g.ucla.edu
-#ID: 904975422
 
 build:
 	gcc -Wall -Wextra -g -pthread -L/run_gperftools/lib/lprofiler -o lab2_list lab2_list.c SortedList.c
